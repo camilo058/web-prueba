@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IRONFORM · Tienda de gym y fitness</title>
+<meta name="description" content="Ropa, suplementos, pesas y accesorios para entrenar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#000;
+  --carbon:#1d1d1f;
+  --rojo:#d7191f;
+  --rojo-oscuro:#a80f14;
+  --gris:#6b6b70;
+  --gris-claro:#ececee;
+  --blanco:#fff;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --texto:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--texto);color:var(--carbon);background:var(--blanco);line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* Encabezado */
+header{background:var(--negro);color:var(--blanco);position:sticky;top:0;z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:var(--display);font-weight:900;font-size:1.9rem;letter-spacing:.04em;text-decoration:none}
+.logo b{color:var(--rojo)}
+.nav ul{display:flex;gap:24px;list-style:none;padding:0}
+.nav ul a{text-decoration:none;font-weight:500;font-size:.95rem;padding:6px 0;border-bottom:2px solid transparent}
+.nav ul a:hover{border-color:var(--rojo)}
+.carrito-btn{background:var(--rojo);color:var(--blanco);border:0;border-radius:4px;padding:10px 16px;font:600 .95rem var(--texto);cursor:pointer}
+.carrito-btn:hover{background:var(--rojo-oscuro)}
+
+/* Hero: el disco de pesa es el elemento memorable */
+.hero{background:var(--negro);color:var(--blanco);overflow:hidden;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:32px;padding-top:56px;padding-bottom:72px}
+.hero h1{font-family:var(--display);font-weight:900;font-size:clamp(3.2rem,9vw,6.4rem);line-height:.92;text-transform:uppercase;letter-spacing:.01em}
+.hero p{max-width:46ch;margin:22px 0 30px;color:#c9c9cd;font-size:1.1rem}
+.btn{display:inline-block;background:var(--rojo);color:var(--blanco);padding:14px 26px;border-radius:4px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-family:var(--texto);font-size:1rem}
+.btn:hover{background:var(--rojo-oscuro)}
+.btn.claro{background:transparent;border:2px solid var(--gris);margin-left:10px}
+.btn.claro:hover{border-color:var(--blanco);background:transparent}
+.disco{aspect-ratio:1;max-width:420px;width:100%;justify-self:center;border-radius:50%;
+  background:
+   radial-gradient(circle,var(--negro) 0 7%,#2b2b2e 7% 9%,transparent 9%),
+   repeating-radial-gradient(circle,var(--rojo) 0 14px,var(--rojo-oscuro) 14px 18px,var(--carbon) 18px 40px);
+  border:10px solid #2b2b2e;position:relative;animation:giro 40s linear infinite}
+.disco::after{content:"20 KG";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:2.6rem;color:var(--blanco);letter-spacing:.08em;transform:translateY(-34%)}
+@keyframes giro{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.disco{animation:none}}
+
+/* Beneficios */
+.beneficios{background:var(--gris-claro)}
+.beneficios .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-top:22px;padding-bottom:22px}
+.beneficios p{font-weight:600;font-size:.95rem}
+.beneficios span{display:block;font-weight:400;color:var(--gris);font-size:.88rem}
+
+/* Catálogo */
+section.catalogo{padding:64px 0}
+h2{font-family:var(--display);font-weight:900;font-size:2.6rem;text-transform:uppercase;line-height:1}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 30px}
+.filtros button{font:600 .92rem var(--texto);padding:9px 18px;border-radius:999px;border:2px solid var(--carbon);background:var(--blanco);cursor:pointer}
+.filtros button[aria-pressed="true"]{background:var(--negro);color:var(--blanco);border-color:var(--negro)}
+.filtros button:hover{border-color:var(--rojo)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px}
+.card{border:1px solid #d6d6da;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;background:var(--blanco)}
+.card .foto{aspect-ratio:4/3;display:grid;place-items:center;background:var(--gris-claro)}
+.card .foto svg{width:42%;height:auto;stroke:var(--carbon);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.card[data-cat="Suplementos"] .foto{background:var(--carbon)}
+.card[data-cat="Suplementos"] .foto svg{stroke:var(--blanco)}
+.card[data-cat="Pesas"] .foto{background:var(--rojo)}
+.card[data-cat="Pesas"] .foto svg{stroke:var(--blanco)}
+.card .info{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.cat{font-size:.82rem;color:var(--gris)}
+.card h3{font-size:1.05rem;font-weight:600}
+.precio{font-family:var(--display);font-weight:700;font-size:1.6rem;margin-top:auto}
+.card button{margin-top:8px;background:var(--negro);color:var(--blanco);border:0;border-radius:4px;padding:11px;font:600 .95rem var(--texto);cursor:pointer}
+.card button:hover{background:var(--rojo)}
+
+/* Banda de oferta */
+.banda{background:var(--rojo);color:var(--blanco);text-align:center;padding:44px 20px}
+.banda h2{font-size:clamp(2rem,5vw,3.2rem)}
+.banda p{margin-top:8px}
+
+/* Pie */
+footer{background:var(--negro);color:#bdbdc2;padding:40px 0;font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+footer a{color:var(--blanco)}
+
+/* Carrito */
+.panel{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:var(--blanco);z-index:40;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.3)}
+.panel.abierto{transform:none}
+.panel header{position:static;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.panel header h2{font-size:1.6rem}
+.panel header button{background:none;border:0;color:var(--blanco);font-size:1.8rem;cursor:pointer;line-height:1}
+.items{flex:1;overflow:auto;padding:12px 20px}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--gris-claro)}
+.item strong{font-weight:600;font-size:.95rem}
+.cant{display:flex;align-items:center;gap:8px}
+.cant button{width:28px;height:28px;border:1px solid var(--carbon);background:var(--blanco);border-radius:4px;cursor:pointer;font-size:1rem}
+.vacio{color:var(--gris);padding:30px 0;text-align:center}
+.total{padding:18px 20px;border-top:2px solid var(--negro)}
+.total div{display:flex;justify-content:space-between;font-weight:600;font-size:1.15rem;margin-bottom:12px}
+.total .btn{width:100%;text-align:center}
+.fondo{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;opacity:0;pointer-events:none;transition:opacity .25s}
+.fondo.abierto{opacity:1;pointer-events:auto}
+.aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--negro);color:var(--blanco);padding:12px 20px;border-radius:4px;z-index:50;transition:transform .25s;font-size:.92rem}
+.aviso.ver{transform:translateX(-50%)}
+
+@media (max-width:760px){
+  .nav ul{display:none}
+  .hero .wrap{grid-template-columns:1fr;padding-top:36px}
+  .disco{max-width:260px;order:-1}
+  .beneficios .wrap{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio">IRON<b>FORM</b></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#catalogo" data-ir="Ropa">Ropa</a></li>
+        <li><a href="#catalogo" data-ir="Suplementos">Suplementos</a></li>
+        <li><a href="#catalogo" data-ir="Pesas">Pesas</a></li>
+        <li><a href="#catalogo" data-ir="Accesorios">Accesorios</a></li>
+      </ul>
+    </nav>
+    <button class="carrito-btn" id="abrir" aria-label="Abrir carrito">Carrito (<span id="conteo">0</span>)</button>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Más peso.<br>Menos excusas.</h1>
+        <p>Ropa, suplementos, pesas y accesorios para entrenar en casa o en el gimnasio. Elige lo que necesitas y empieza hoy.</p>
+        <a class="btn" href="#catalogo">Ver productos</a>
+        <a class="btn claro" href="#oferta">Ver oferta</a>
+      </div>
+      <div class="disco" role="img" aria-label="Disco de pesa de 20 kilos"></div>
+    </div>
+  </section>
+
+  <div class="beneficios">
+    <div class="wrap">
+      <p>Envío gratis desde $250.000<span>En compras dentro del país</span></p>
+      <p>Cambios en 30 días<span>Si la talla o el producto no es el correcto</span></p>
+      <p>Pago seguro<span>Tarjeta, PSE o contra entrega</span></p>
+    </div>
+  </div>
+
+  <section class="catalogo" id="catalogo">
+    <div class="wrap">
+      <h2>Catálogo</h2>
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="banda" id="oferta">
+    <h2>15% de descuento en tu primera compra</h2>
+    <p>Usa el código <strong>PRIMERA15</strong> al finalizar tu pedido.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:#fff">IRONFORM</strong><br>Equipo para entrenar de verdad.</div>
+    <div>Contacto: <a href="mailto:contacto@ironform.example">contacto@ironform.example</a></div>
+    <div>© 2026 IRONFORM</div>
+  </div>
+</footer>
+
+<div class="fondo" id="fondo"></div>
+<aside class="panel" id="panel" aria-label="Carrito de compras" aria-hidden="true">
+  <header><h2>Tu carrito</h2><button id="cerrar" aria-label="Cerrar carrito">&times;</button></header>
+  <div class="items" id="items"></div>
+  <div class="total">
+    <div><span>Total</span><span id="total">$0</span></div>
+    <button class="btn" id="pagar">Finalizar compra</button>
+  </div>
+</aside>
+<div class="aviso" id="aviso" role="status"></div>
+
+<script>
+/* Edita aquí tus productos. */
+const PRODUCTOS = [
+  {id:1, nombre:"Camiseta compresión Pro", cat:"Ropa", precio:89000},
+  {id:2, nombre:"Leggings Power sin costuras", cat:"Ropa", precio:129000},
+  {id:3, nombre:"Hoodie Iron negro", cat:"Ropa", precio:169000},
+  {id:4, nombre:"Proteína Whey 2 lb", cat:"Suplementos", precio:139000},
+  {id:5, nombre:"Creatina monohidratada 300 g", cat:"Suplementos", precio:99000},
+  {id:6, nombre:"Pre-entreno Ignite", cat:"Suplementos", precio:119000},
+  {id:7, nombre:"Mancuernas ajustables 20 kg", cat:"Pesas", precio:349000},
+  {id:8, nombre:"Barra olímpica 20 kg", cat:"Pesas", precio:429000},
+  {id:9, nombre:"Kettlebell 12 kg", cat:"Pesas", precio:129000},
+  {id:10, nombre:"Guantes de entrenamiento", cat:"Accesorios", precio:59000},
+  {id:11, nombre:"Cinturón de levantamiento", cat:"Accesorios", precio:149000},
+  {id:12, nombre:"Shaker 600 ml", cat:"Accesorios", precio:35000}
+];
+const CATEGORIAS = ["Todo","Ropa","Suplementos","Pesas","Accesorios"];
+const ICONOS = {
+  Ropa:'<path d="M20 12 8 20l6 8 8-4v28h20V24l8 4 6-8-12-8c-2 5-6 7-12 7s-10-2-12-7z"/>',
+  Suplementos:'<rect x="16" y="22" width="32" height="34" rx="5"/><rect x="20" y="12" width="24" height="10" rx="2"/><path d="M16 36h32M16 46h32"/>',
+  Pesas:'<path d="M6 26v12M14 20v24M50 20v24M58 26v12M14 32h36"/>',
+  Accesorios:'<circle cx="32" cy="38" r="16"/><path d="M22 24c0-10 20-10 20 0"/><circle cx="32" cy="38" r="5"/>'
+};
+const fmt = n => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n);
+const $ = id => document.getElementById(id);
+let categoria = "Todo";
+let carrito = {};
+
+function pintarFiltros(){
+  $("filtros").innerHTML = CATEGORIAS.map(c =>
+    `<button type="button" data-cat="${c}" aria-pressed="${c===categoria}">${c}</button>`).join("");
+}
+function pintarProductos(){
+  const lista = PRODUCTOS.filter(p => categoria==="Todo" || p.cat===categoria);
+  $("grid").innerHTML = lista.map(p => `
+    <article class="card" data-cat="${p.cat}">
+      <div class="foto"><svg viewBox="0 0 64 64" aria-hidden="true">${ICONOS[p.cat]}</svg></div>
+      <div class="info">
+        <span class="cat">${p.cat}</span>
+        <h3>${p.nombre}</h3>
+        <span class="precio">${fmt(p.precio)}</span>
+        <button type="button" data-add="${p.id}">Agregar al carrito</button>
+      </div>
+    </article>`).join("");
+}
+function pintarCarrito(){
+  const ids = Object.keys(carrito);
+  let total = 0, cuenta = 0;
+  $("items").innerHTML = ids.length ? ids.map(id => {
+    const p = PRODUCTOS.find(x => x.id==id), q = carrito[id];
+    total += p.precio*q; cuenta += q;
+    return `<div class="item"><strong>${p.nombre}</strong><span>${fmt(p.precio*q)}</span>
+      <div class="cant"><button data-menos="${id}" aria-label="Quitar uno">−</button><span>${q}</span><button data-mas="${id}" aria-label="Agregar uno">+</button></div></div>`;
+  }).join("") : '<p class="vacio">Tu carrito está vacío. Agrega un producto del catálogo.</p>';
+  $("total").textContent = fmt(total);
+  $("conteo").textContent = cuenta;
+}
+function aviso(t){
+  const a = $("aviso"); a.textContent = t; a.classList.add("ver");
+  clearTimeout(aviso.t); aviso.t = setTimeout(()=>a.classList.remove("ver"),2200);
+}
+function panel(abrir){
+  $("panel").classList.toggle("abierto",abrir);
+  $("fondo").classList.toggle("abierto",abrir);
+  $("panel").setAttribute("aria-hidden",!abrir);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button,a"); if(!t) return;
+  if(t.dataset.cat && t.closest("#filtros")){ categoria=t.dataset.cat; pintarFiltros(); pintarProductos(); }
+  if(t.dataset.ir){ categoria=t.dataset.ir; pintarFiltros(); pintarProductos(); }
+  if(t.dataset.add){ carrito[t.dataset.add]=(carrito[t.dataset.add]||0)+1; pintarCarrito(); aviso("Producto agregado al carrito"); }
+  if(t.dataset.mas){ carrito[t.dataset.mas]++; pintarCarrito(); }
+  if(t.dataset.menos){ if(--carrito[t.dataset.menos]<=0) delete carrito[t.dataset.menos]; pintarCarrito(); }
+});
+$("abrir").onclick = () => panel(true);
+$("cerrar").onclick = $("fondo").onclick = () => panel(false);
+document.addEventListener("keydown", e => { if(e.key==="Escape") panel(false); });
+$("pagar").onclick = () => {
+  if(!Object.keys(carrito).length) return aviso("Agrega productos antes de finalizar");
+  carrito = {}; pintarCarrito(); panel(false);
+  aviso("Pedido de prueba enviado. Conecta aquí tu pasarela de pago.");
+};
+
+pintarFiltros(); pintarProductos(); pintarCarrito();
+</script>
+</body>
+</html>
